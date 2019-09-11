@@ -88,7 +88,7 @@ class Webget():
 
 
 if __name__ == "__main__":
-    # web = Webget("http://192.168.1.20/game/fsjx/testebin")
+    # web = Webget("http://192.168.1.20/sygame/fsjx/testebin")
     # web = Webget("http://127.0.0.1/test/cb_fun.erl", "test")
     web = Webget("http://192.168.1.121/fsjx_tools/gen_data", "test")
     # web = Webget("http://192.168.1.121/fsjx_inc", "test")

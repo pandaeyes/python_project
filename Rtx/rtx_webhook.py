@@ -12,10 +12,10 @@ import requests
 import json
 import time
 
-testurl = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=-7f1c-4133-a23c-'
-url = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=-99d7-48f8-8f97-'
-urlSkill = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=-55aa-41ba--e85ab293abd8'
-urlz = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=-9c72-4deb-af73-"
+testurl = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=eb0c363d-7f1c-4133-a23c-7a32b8e5a27a'
+url = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=8d92063f-99d7-48f8-8f97-6405950593bc'
+urlSkill = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=8c7b59a6-55aa-41ba-886e-e85ab293abd8'
+urlz = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=4edaa266-9c72-4deb-af73-72da5910d4ad"
 
 pattern = re.compile(r'.*\[ERROR\]\[(.*)\]\[(\w+):(\d+)\](.*)', re.I)
 msgDict = {}
@@ -37,8 +37,11 @@ def SendMsg(msg):
             if (now - inftime) < 120:
                 return
         msgDict[inf] = now
-        inf = re.sub(r'file,\[([\d,\s\v\t]*)\]', Asc2Char, inf)
-        inf = re.sub(r'<<([\d,\s\v\t]*)>>', Asc2Char2, inf)
+        try:
+            inf = re.sub(r'file,\[([\d,\s\v\t]*)\]', Asc2Char, inf)
+            inf = re.sub(r'<<([\d,\s\v\t]*)>>', Asc2Char2, inf)
+        except:
+            pass
         content = "**ErrorReport**:\n >**Time**:" + str(tm) + "\n**Mod**: <font color='#FF0000'>" + mod + " , " + str(line) + "</font>\n" + inf
         body = {"msgtype": "markdown", "markdown": {"content" : content}}
         headers = {'content-type': "application/json"}
@@ -81,7 +84,7 @@ def Asc2Char2(s):
 if __name__ == "__main__":
     current_encoding = "utf8"
 
-    popen = subprocess.Popen(['tailf', 'zone/game_dev_1/screenlog.0'],
+    popen = subprocess.Popen(['tailf', 'zone/fssj2_dev_1/screenlog.0'],
                          stdout = subprocess.PIPE,
                          stderr = subprocess.PIPE,
                          bufsize=1)

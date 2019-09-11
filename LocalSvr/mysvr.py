@@ -5,10 +5,10 @@ import os
 import io
 
 from config.webget import Webget
+from config.cfgreader import CfgReader 
 
 # 安装
 def DoInstall():
-    os.popen('cp config/cfg.ini . -f')
     MakeEmptyDir()
     DoDownload()
 
@@ -25,6 +25,7 @@ def DoDownloadServer():
     DoDownloadCur("http://192.168.1.121/fsjx_sh", "server/sh")
     output = os.popen('cp server/sh/srv.sh server/ -f')
     DoDownloadCur("http://192.168.1.121/fsjx_tpl", "server/tpl")
+    MakeDir()
     Log("Download Server Finish")
 
 def DoDownloadTools():
@@ -42,7 +43,10 @@ def DoDownloadTools():
     DoDownloadSingle("http://192.168.1.121/fsjx_tools/completion", "tools", "completion")
     DoDownloadSingle("http://192.168.1.121/fsjx_tools/dev.sh", "tools", "dev.sh")
     DoDownloadSingle("http://192.168.1.121/fsjx_tools/tools.sh", "tools", "tools.sh")
-    output = os.popen('cp config/env_cfg.erl tools/gen_data/ -f')
+    os.system("rm dev.sh -rf && ln tools/dev.sh dev.sh -s")
+    reader = CfgReader()
+    reader.GenToolEnvCfg()
+    MakeDir()
     Log("Download Tools Finish")
 
 def Log(msg):
@@ -53,12 +57,39 @@ def MakeEmptyDir():
         "data/lua"
         ,"data/map"
         ,"resources"
-        ,"zone"
         ,"server/src/ai_data"
         ,"server/src/data"
         ,"server/src/data/battle_data"
         ,"server/src/apps/lager"
         ,"server/src/apps/lager/ebin"
+
+        ,"zone"
+        ,"zone/fsjx_mysvr_1/dets"
+        ,"zone/fsjx_mysvr_1/log"
+        ,"zone/fsjx_mysvr_1/log_file"
+        ,"zone/fsjx_mysvr_1/var"
+    ]
+    for path in tmpPaths:
+        if not os.path.exists(path):
+            os.makedirs(path)
+    os.system("cp config/zone_cfg/* zone/fsjx_mysvr_1 -rf")
+
+def MakeDir():
+    tmpPaths = [
+        "data/lua"
+        ,"data/map"
+        ,"resources"
+        ,"server/src/ai_data"
+        ,"server/src/data"
+        ,"server/src/data/battle_data"
+        ,"server/src/apps/lager"
+        ,"server/src/apps/lager/ebin"
+
+        ,"zone"
+        ,"zone/fsjx_mysvr_1/dets"
+        ,"zone/fsjx_mysvr_1/log"
+        ,"zone/fsjx_mysvr_1/log_file"
+        ,"zone/fsjx_mysvr_1/var"
     ]
     for path in tmpPaths:
         if not os.path.exists(path):
@@ -84,8 +115,6 @@ def DoStartSvr():
 
 def DoUpdateConfig():
     MakeEmptyDir()
-    os.popen('cp config/env_cfg.erl tools/gen_data/ -f')
-    os.popen('cp config/cfg.ini . -f')
 
 def DoClearData():
     dataPaths = [
@@ -101,6 +130,11 @@ def DelFile(dirPath):
         path_file = os.path.join(dirPath, p)
         if os.path.isfile(path_file):
             os.remove(path_file)
+
+def DoGenConfig():
+    reader = CfgReader()
+    reader.GenAll()
+    os.system("rm -rf dev.sh && ln tools/dev.sh dev.sh -s")
 
 def DoGenData(data):
     os.system("sh dev.sh gen_data " + data)
@@ -154,8 +188,8 @@ if __name__ == "__main__":
     elif cmd == "download_tools":
         DoDownloadTools()
     elif cmd == "update_config":
-        DoUpdateConfig()
-
+        print("[ERROR]该命令不再使用")
+        # DoUpdateConfig()
     elif cmd == "start":
         DoStartSvr()
     elif cmd == "gen_data":
@@ -181,17 +215,22 @@ if __name__ == "__main__":
         if len(sys.argv) == 4:
             count = sys.argv[3]
         DoTruncate(platform, count)
+    elif cmd == "gen_config":
+        DoGenConfig()
+    elif cmd == "gen_dir":
+        MakeDir()
     else:
         print("------请输入以下命令-----------")
         print("install          安装")
         print("download         下载server和tools")
         print("download_server  下载server")
         print("download_tools   下载tools")
-        print("update_config    更新配置文件")
+        print("gen_config       生成配置文件[form config.json]")
         print("start            启动server")
         print("gen_map          生成地图配置")
         print("gen_data         生成数据")
         print("gen_battle       生成战斗配置")
+        print("gen_dir          创建必要的空目录")
         print("copy_ai          复制ai数据到指定目录")
         print("make_data        编译服务端数据")
         print("make_ai_data     编译AI数据")
