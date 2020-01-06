@@ -3,6 +3,7 @@ import re
 import io
 import sys
 import subprocess
+import branch
 
 def CallCmdPopen(cmd):
     current_encoding = "utf8"
@@ -21,6 +22,7 @@ def CallCmdPopen(cmd):
     return retList
 
 def CallCmd(cmd):
+    print("CallCmd:" + cmd)
     r = os.system(cmd)
     if r == 0:
         return True 
@@ -86,15 +88,12 @@ def MergeLocalBranchToMaster(brName):
 # ]
 
 if __name__ == '__main__':
-    mergeBrListTmp = []
-    mergeBrList = []
-    with open("../mergebranch.txt") as fileObject:
-        mergeBrListTmp = fileObject.readlines()
-    for mbr in mergeBrListTmp:
-        mergeBrList.append(mbr.strip())
     CoMaster()
+    GitPull()
     brList = GetLocalBranch()
-    for br in mergeBrList:
+    for br in branch.mergeBrList:
+        if br.strip() == "":
+            continue
         if br not in brList:
             CoNewBranch(br)
         MergeLocalBranchToMaster(br)
