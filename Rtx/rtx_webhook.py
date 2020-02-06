@@ -12,10 +12,10 @@ import requests
 import json
 import time
 
-testurl = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=eb0c363d-7f1c-4133-a23c-7a32b8e5a27a'
-url = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=8d92063f-99d7-48f8-8f97-6405950593bc'
-urlSkill = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=8c7b59a6-55aa-41ba-886e-e85ab293abd8'
-urlz = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=4edaa266-9c72-4deb-af73-72da5910d4ad"
+testurl = ''
+url = ''
+urlSkill = ''
+urlz = ""
 
 pattern = re.compile(r'.*\[ERROR\]\[(.*)\]\[(\w+):(\d+)\](.*)', re.I)
 msgDict = {}
