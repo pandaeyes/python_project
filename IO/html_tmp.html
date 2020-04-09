@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>ServerError</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+</head>
+<style type="text/css">
+table{border-collapse:collapse;border-spacing:0;border-left:1px solid #888;border-top:1px solid #888;background:#FFFFFF;}
+th,td{border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; font-size:12px;}
+th{font-weight:bold;background:#ccc;}
+
+.container{width:98%;}
+.logspan{width:250px;float: left;}
+</style>
+<body>
+<b><font style="font-size:15px;">${data}错误日志信息</font></b>
+<br></br>
+<b  style="width:98%;background:#FAEBD7;font-size:14px;">日志来源</b>
+<div class= "container">
+    ${fromlist}
+</div>
+<br>
+<table width="98%">
+<tr bgcolor="#F0F8FF" >
+<td width="40%" style="font-size:15px; font-weight:bold;">错误信息</td>
+<td width="5%" style="font-size:15px; font-weight:bold;">数量</td>
+<td width="55%" style="font-size:15px; font-weight:bold;">来源</td>
+</tr>
+    ${errorlist}
+</table>
+</body>
+</html>
+
