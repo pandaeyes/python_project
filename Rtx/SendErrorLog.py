@@ -4,7 +4,7 @@ import time
 import os
 
 def SendMsg(msg):
-    url = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=8736027e-4fb9-4feb-9aae-3c010cd7bad9'
+    url = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key='
     errorUrl = "http://work.weixin.qq.com/api/doc"
     content = "**" + msg + "** \n" + "[点击这里查看错误日志](" + errorUrl + ")"
     body = {"msgtype": "markdown", "markdown": {"content" : content}}

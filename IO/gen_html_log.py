@@ -5,6 +5,7 @@ import requests
 import json
 import io
 import time
+import datetime
 import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -25,9 +26,9 @@ class HtmlGenerator():
         fw.write(u"</head>\n")
         fw.write(u"<style type=\"text/css\">\n")
         fw.write(u"table{border-collapse:collapse;border-spacing:0;border-left:1px solid #888;border-top:1px solid #888;background:#FFFFFF;}\n")
-        fw.write(u"th,td{border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px; font-size:13px;}\n")
+        fw.write(u"th,td{border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 10px; font-size:13px;}\n")
         fw.write(u"th{font-weight:bold;background:#ccc;}\n")
-        fw.write(u".container{width:98%;}\n")
+        fw.write(u".container{width:98%; overflow: auto;}\n")
         fw.write(u".logspan{width:230px;float: left;}\n")
         fw.write(u"</style>\n")
         fw.write(u"<body>\n")
@@ -40,25 +41,28 @@ class HtmlGenerator():
 
     def WriteErrorList(self, fw):
         fw.write(u"<div class= \"container\">\n")
-	    # flist = sorted(self.fileList)
+	flist = sorted(self.fileList)
         if len(flist) > 0:
             for filename in flist:
                 fw.write(u"<span class=\"logspan\">" + self.GenHref(filename) + "</span>\n")
         fw.write(u"</div>\n")
 
     def WriteTable(self, fw, errorInfo):
-        fw.write(u"<br></br>\n")
+        fw.write(u"<br/>\n")
         fw.write(u"<table width=\"98%\">\n")
         fw.write(u"<tr bgcolor=\"#F0F8FF\" >\n")
+        fw.write(u"<td width=\"8px\" style=\"font-size:15px; font-weight:bold;\"></td>\n")
         fw.write(u"<td width=\"40%\" style=\"font-size:15px; font-weight:bold;\">错误信息</td>\n")
         fw.write(u"<td width=\"5%\" style=\"font-size:15px; font-weight:bold;\">数量</td>\n")
         fw.write(u"<td width=\"55%\" style=\"font-size:15px; font-weight:bold;\">来源</td>\n")
         fw.write(u"</tr>\n")
 
         d_order= sorted(errorInfo.items(), key = lambda x:x[1]["count"], reverse = True)
+	index = 1
         for detail in d_order:
             einfo = detail[1] 
             fw.write(u"<tr>\n")
+            fw.write(u"<td>" + str(index) + "</td>\n")
             fw.write(u"<td>" + einfo["key"] + "</td>\n")
             fw.write(u"<td>" + str(einfo["count"]) + "</td>\n")
             fw.write(u"<td>\n")
@@ -66,6 +70,7 @@ class HtmlGenerator():
                 fw.write(self.GenHref(efile) + u"&nbsp;\n")
             fw.write(u"</td>\n")
             fw.write(u"</tr>\n")
+            index = index + 1
         fw.write(u"</table>\n")
         fw.write(u"</body>\n")
         fw.write(u"</html>\n")
@@ -112,7 +117,7 @@ class ScanLog():
 
     def GenHtml(self):
         genHtml = HtmlGenerator(self.root, self.timestr, self.fileList)
-        with io.open(self.htmlPath, 'w', encoding='utf-8') as fwriter:
+        with io.open("/data/ysc_log/" + self.htmlPath, 'w+', encoding='utf-8') as fwriter:
             genHtml.WriteHead(fwriter)
             genHtml.WriteErrorList(fwriter)
             genHtml.WriteTable(fwriter, self.errorInfo)
@@ -120,7 +125,10 @@ class ScanLog():
     def SendRtxMsg(self):
         url = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=a90ebab6-d1b8-42e1-bbdc-91041fe23aeb'
         mainurl = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=7e4ef424-b0d0-418a-b122-339a8212c943'
-        msg = "这是昨天今天线上的服务端错误日志报告, 大家都看一下，有问题记得及时修复!"
+        msg = "这是昨天今天线上的服务端错误日志报告, 大家都看一下，有问题记得及时修复!客户端同学请查看Bugly信息。"
+	h = datetime.datetime.now().hour
+	if h > 12:
+	    msg = "晚间报告:服务端错误日志报告, 大家都看一下，有问题及时修复!客户端同学请查看Bugly信息。"
         # url = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=8736027e-4fb9-4feb-9aae-3c010cd7bad9'
         # mainurl = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=8736027e-4fb9-4feb-9aae-3c010cd7bad9'
         errorUrl = "http://log-collect-ysc.shiyuegame.com/" + self.htmlPath
@@ -135,3 +143,4 @@ if __name__ == '__main__':
     scanLog.ScanFile()
     scanLog.GenHtml()
     scanLog.SendRtxMsg()
+

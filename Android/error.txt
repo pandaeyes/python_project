@@ -1,0 +1,28 @@
+05-26 14:05:25.283 E/CRASH   (17353): 	#01  pc 0001a423  /system/lib/libc.so (abort+54)
+05-26 14:05:25.283 E/CRASH   (17353): 	#02  pc 0001edc1  /system/lib/libc.so (__libc_fatal+24)
+05-26 14:05:25.283 E/CRASH   (17353): 	#03  pc 000492ff  /system/lib/libc.so (__pthread_internal_find(long)+86)
+05-26 14:05:25.283 E/CRASH   (17353): 	#04  pc 00049215  /system/lib/libc.so (pthread_gettid_np+2)
+05-26 14:05:25.283 E/CRASH   (17353): 	#05  pc 000495af  /system/lib/libc.so (pthread_kill+18)
+05-26 14:05:25.283 E/CRASH   (17353): 	#06  pc 00005889  /data/app/com.shiyuegame.yscthird-92lAM4_KLfCfUKMpHXh8vw==/lib/arm/libBugly.so
+05-26 14:05:25.283 E/CRASH   (17353): 	#07  pc 000c7cd4  /data/app/com.shiyuegame.yscthird-92lAM4_KLfCfUKMpHXh8vw==/lib/arm/libmono.so (mono_chain_signal+80)
+05-26 14:05:25.283 E/CRASH   (17353): 	#08  pc 000245a4  /data/app/com.shiyuegame.yscthird-92lAM4_KLfCfUKMpHXh8vw==/lib/arm/libmono.so (mono_sigsegv_signal_handler+212)
+05-26 14:05:25.283 E/CRASH   (17353): 	#09  pc 00002337  /system/bin/app_process32
+05-26 14:05:25.283 E/CRASH   (17353): 	#10  pc 00018ae4  /system/lib/libc.so
+05-26 14:05:25.283 E/CRASH   (17353): 	#11  pc 00049676  /system/lib/libc.so (pthread_mutex_init+63)
+05-26 14:05:25.283 E/CRASH   (17353): 	#12  pc 000d5530  /data/app/com.shiyuegame.yscthird-92lAM4_KLfCfUKMpHXh8vw==/lib/arm/libmono.so (mono_gc_remove_weak_track_handle+28)
+05-26 14:05:25.283 E/CRASH   (17353): 	#13  pc 000fdd18  /data/app/com.shiyuegame.yscthird-92lAM4_KLfCfUKMpHXh8vw==/lib/arm/libmono.so (mono_gchandle_free+384)
+05-26 14:05:25.283 E/CRASH   (17353): 	#14  pc 0087e868  /data/app/com.shiyuegame.yscthird-92lAM4_KLfCfUKMpHXh8vw==/lib/arm/libunity.so
+05-26 14:05:25.283 E/CRASH   (17353): 	#15  pc 002b2738  /data/app/com.shiyuegame.yscthird-92lAM4_KLfCfUKMpHXh8vw==/lib/arm/libunity.so
+05-26 14:05:25.283 E/CRASH   (17353): 	#16  pc 002b4470  /data/app/com.shiyuegame.yscthird-92lAM4_KLfCfUKMpHXh8vw==/lib/arm/libunity.so
+05-26 14:05:25.283 E/CRASH   (17353): 	#17  pc 002b23ac  /data/app/com.shiyuegame.yscthird-92lAM4_KLfCfUKMpHXh8vw==/lib/arm/libunity.so
+05-26 14:05:25.283 E/CRASH   (17353): 	#18  pc 002b5df0  /data/app/com.shiyuegame.yscthird-92lAM4_KLfCfUKMpHXh8vw==/lib/arm/libunity.so
+05-26 14:05:25.283 E/CRASH   (17353): 	#19  pc 000edd2c  /data/app/com.shiyuegame.yscthird-92lAM4_KLfCfUKMpHXh8vw==/lib/arm/libunity.so
+05-26 14:05:25.283 E/CRASH   (17353): 	#20  pc 006b7574  /data/app/com.shiyuegame.yscthird-92lAM4_KLfCfUKMpHXh8vw==/lib/arm/libunity.so
+05-26 14:05:25.283 E/CRASH   (17353): 	#21  pc 006b74cc  /data/app/com.shiyuegame.yscthird-92lAM4_KLfCfUKMpHXh8vw==/lib/arm/libunity.so
+05-26 14:05:25.283 E/CRASH   (17353): 	#22  pc 006b78e8  /data/app/com.shiyuegame.yscthird-92lAM4_KLfCfUKMpHXh8vw==/lib/arm/libunity.so
+05-26 14:05:25.283 E/CRASH   (17353): 	#23  pc 006b79d0  /data/app/com.shiyuegame.yscthird-92lAM4_KLfCfUKMpHXh8vw==/lib/arm/libunity.so
+05-26 14:05:25.283 E/CRASH   (17353): 	#24  pc 006b7040  /data/app/com.shiyuegame.yscthird-92lAM4_KLfCfUKMpHXh8vw==/lib/arm/libunity.so
+05-26 14:05:25.284 E/CRASH   (17353): 	#25  pc 008f5544  /data/app/com.shiyuegame.yscthird-92lAM4_KLfCfUKMpHXh8vw==/lib/arm/libunity.so
+05-26 14:05:25.284 E/CRASH   (17353): 	#26  pc 00049033  /system/lib/libc.so (__pthread_start(void*)+22)
+05-26 14:05:25.284 E/CRASH   (17353): 	#27  pc 0001b14b  /system/lib/libc.so (__start_thread+34)
+

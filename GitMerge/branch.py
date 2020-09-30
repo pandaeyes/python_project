@@ -3,7 +3,7 @@ mergeBrList = [
     #,"zyh_bug_master"
     #,"hzf_master"
     #,"zyh_master"
-    ,"xja_master"
+    ,"master_mer"
     #,"gyh_master"
     #,"zln_master"
     #,"cq_master"
